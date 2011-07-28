@@ -1,0 +1,1 @@
+# locations/models.py
