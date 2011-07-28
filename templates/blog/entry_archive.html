@@ -1,0 +1,18 @@
+{% extends "blog_entries.html" %}
+{% block title %}{{ block.super }}| Latest Entries{% endblock %}
+{% block content %}
+{% for entry in latest %}
+	<h2>{{ entry.title }}</h2>
+	<p>Published on {{ entry.pub_date|date:"F j, Y" }}</p>
+	{% if entry.excerpt_html %}
+		{{ entry.excerpt_html|safe }}
+	{% else %}
+		{{ entry.body_html|truncatewords_html:"50"|safe }}
+	{% endif %}
+	<p><a href="{{ entry.get_absolute_url }}">Read full entry...</a></p>
+{% endfor %}
+{% endblock %}s
+
+{% block description %}
+<p>This is a list of the latest {{ latest.count }} entr{{ latest.count|pluralize:"y,ies" }} published on my blog.</p>
+{% endblock %}

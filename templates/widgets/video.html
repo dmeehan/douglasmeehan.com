@@ -1,0 +1,8 @@
+{% spaceless %}
+    <!-- Using the Video for Everybody Embed Code (modified for VP8/WebM) http://camendesign.com/code/video_for_everybody -->
+    <video src="{{ visual.content_object.video.url}}"
+           width="{{ visual.content_object.poster.large.width }}" 
+           height="{{ visual.content_object.poster.large.height }}" 
+           poster="{{ visual.content_object.poster.large.url }}" controls preload>
+    </video>
+{% endspaceless %}

@@ -1,0 +1,197 @@
+
+{% extends "portfolio/portfolio.html" %}
+{% block title %}{{ block.super }} | {{ project.title }}{% endblock %}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="/media/css/colorbox.css" type="text/css" media="screen" title="Colorbox">
+{% endblock %}
+{% block content %}
+<div id="project">
+   <a href="#" class="control prev">Previous</a>
+   {% spaceless %}
+   <div id="images">
+       <div class="display">
+           <ul id="gallery">{% spaceless %}{% for visual in project.projectvisual_set.all %}
+               <li>
+               {% if visual.content_object.original %}
+                <a href="{{ visual.content_object.max.url }}" class="max" title="{{ visual.content_object.caption }}">
+                <img src="{{ visual.content_object.large.url }}" 
+                     width="{{ visual.content_object.large.width }}"
+                     height="{{ visual.content_object.large.height }}"
+                     alt="{{ visual.content_object.title }}" />
+                </a>
+               {% endif %}
+               {% if visual.content_object.video %}
+                    {% include "widgets/video.html" %}
+               {% endif %}
+               {% if visual.content_object.audio %}
+                    {% include "widgets/audio.html" %}
+               {% endif %}
+               {% if visual.content_object.swf %}
+               <script type="text/javascript">
+                    $(document).ready(function(){
+	                 $(".flash{{ forloop.counter }}").colorbox({opacity:0.85, inline:true, href:"#flash{{ forloop.counter }}"});
+                    });
+               </script>
+               <a href="#"
+                  class="flash{{ forloop.counter }} flashplay" title="{{ visual.content_object.caption }}">
+                    <img src="{{ visual.content_object.poster.large.url }}" 
+                     width="{{ visual.content_object.poster.large.width }}"
+                     height="{{ visual.content_object.poster.large.height }}"
+                     alt="{{ visual.content_object.title }}" />
+               </a>
+               <div style="display:none;">
+                    <object id="flash{{ forloop.counter }}" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="1024" height="768">
+                        <param name="movie" value="{{ visual.content_object.swf.url}}" />
+                        <!--[if !IE]>-->
+                        <object type="application/x-shockwave-flash" data="{{ visual.content_object.swf.url}}" width="1024" height="768">
+                        <!--<![endif]-->
+                        <p>Alternative content</p>
+                        <!--[if !IE]>-->
+                        </object>
+                        <!--<![endif]-->
+                    </object>
+                </div>
+               {% endif %}
+               <p class="caption">{{ visual.content_object.caption|safe }}</p>
+               </li>
+           {% endfor %}
+           {% endspaceless %}
+         </ul>
+        </div>
+    </div>
+    {% endspaceless %}
+    <!--<a href="#" class="zoom">
+        <span>+ click to zoom</span>
+    </a>-->
+    <a href="#" class="control next">Next</a>
+    <div id="details">
+        <div id="description">
+            <h2>{{ project.title }}</h2>
+            <div id="body">
+            {{ project.description_html|safe }}
+            </div>
+            <ul id="project-nav">
+                {% if project.get_previous_by_date %}
+                <li>
+                    <a class="next-proj"
+                       title="Next Project: {{ project.get_previous_by_date.title }}"  
+                       href="{% url level0.portfolio.views.project_detail project.get_previous_by_date.slug %}">➜</a>
+                </li>
+                {% endif %}
+                {% if project.get_next_by_date %}
+                <li>
+                    <a class="prev-proj" 
+                       title="Previous Project: {{ project.get_next_by_date.title }}" 
+                       href="{% url level0.portfolio.views.project_detail project.get_next_by_date.slug %}">➜</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+        <div id="meta">
+        {% block meta %}
+            <p id="date">{{ project.date|date:"MY" }}</p>
+            <h3 id="context">{{ project.context }}</h3>
+            <ul id="discipline">
+                {% for discipline in project.disciplines.all %}
+                <li class="{{ discipline.name|cut:" "|lower}}">
+                    <a class="teaser" href="{% url level0.portfolio.views.discipline_detail discipline.slug %}">{{ discipline.name }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% if project.client_set.all %}
+               <h3>Client{{ project.client_set.all|pluralize }}</h3>
+               <ul>
+               {% for client in project.client_set.all %}
+                   <li>
+                   {% if client.content_object.full_name %}
+                       {{ client.content_object.full_name }}
+                   {% else %}
+                       {{ client.content_object.name }}
+                   {% endif %}
+                   </li> 
+               {% endfor %}
+               </ul>
+            {% endif %}
+            {% if project.firm_set.all %}
+               <h3>Firm{{ project.firm_set.all|pluralize }}</h3>
+               <ul>
+                   {% for firm in project.firm_set.all %}
+                   <li>{{ firm.firm.name }}</li>
+                   {% endfor %}
+               </ul>
+            {% endif %}
+            {% if project.studio %}
+               <h3>Studio</h3>
+               <p>{{ project.studio.name }}<br />
+               {{ project.studio.critic.full_name }}<br />
+               {{ project.studio.semester }} {{ project.studio.date|date:"Y" }}</p>
+            {% endif %}
+            {% if project.competition %}
+               <h3>Competition</h3>
+               <p>{{ project.competition.name }}</p>
+            {% endif %}
+            {% if project.collaborator_set.all %}
+                <h3>Collaborators</h3>
+                <ul>
+                {% for collab in project.collaborator_set.all %}
+                    <li>{{ collab.person.full_name }}</li> 
+                {% endfor %}
+                </ul>
+            {% endif %}
+            {% if project.projectdocument_set.all %}
+                <h3>Downloads</h3>
+                <ul>
+                    {% for item in project.projectdocument_set.all %}
+                    <li><a href="{{ item.document.document.url }}" title="{{ item.document.document.title }}">
+                            {{ item.document }}</a> ({{ item.document.document.size|filesizeformat }})</li>
+                    {% endfor %} 
+                </ul>
+            {% endif %}
+            {% if project.external_url %}
+                <h3>Links</h3>
+                <ul>
+                   <li><a href="{{ project.external_url }}">Visit Site</a></li>
+                </ul>
+            {% endif %}
+        </div>
+
+        {% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block js_local %}
+<script type="text/javascript" src="/media/js/jquery/jcarousel-lite/jcarousellite_1.0.1.pack.js"></script>
+<script type="text/javascript" src="/media/js/jquery/easing/jquery.easing.1.3.js"></script>
+<script src="http://html5media.googlecode.com/svn/trunk/src/html5media.min.js"></script>
+<!--<script type="text/javascript" src="http://cdn.sublimevideo.net/js/ogxmnqcc.js"></script>-->
+<script type="text/javascript" src="/media/js/jquery/jquery.colorbox-min.js"></script>
+<script type="text/javascript">
+$(function() {
+    $(".display").jCarouselLite({
+        btnNext: ".next",
+        btnPrev: ".prev",
+        speed: 800,
+        easing: "easeInOutSine"
+    });
+});
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+	   $(".max").colorbox({opacity:0.85, slideshow:true});
+	   $(".flash").colorbox({opacity:0.85, inline:true, href:"#flash"});
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+	   $('#discipline li').each(function (){
+            var thisItem = $(this);
+            var thisClass = thisItem.attr('class');
+            var thisLink = $(thisItem).find("a");
+            var newHref = "/work/#" + thisClass;
+            thisLink.attr("href", newHref);
+        });
+    });
+</script>
+{% endblock js_local %}

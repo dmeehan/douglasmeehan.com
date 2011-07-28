@@ -1,0 +1,46 @@
+{% spaceless %}
+<!-- first try HTML5 playback. if serving as XML, expand `controls` to `controls="controls"` and autoplay likewise -->
+<video width="{{ visual.content_object.poster.large.width }}" 
+       height="{{ visual.content_object.poster.large.height }}" 
+       poster="{{ visual.content_object.poster.large.url }}" controls>
+	<source src="{{ visual.content_object.video.url }}" 
+	        type="video/mp4" /><!-- Safari / iPhone video -->
+	<!-- IE only QuickTime embed: IE6 is ignored as it does not support `<object>` in `<object>` so we skip QuickTime
+	     and go straight to Flash further down. the line break after the `classid` is required due to a bug in IE -->
+	<!--[if gt IE 6]>
+	<object width="{{ visual.content_object.poster.large.width }}" height="{{ visual.content_object.poster.large.height }}" classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B"><!
+	[endif]-->
+	<!-- non-IE QuickTime embed (hidden from IE): the self-closing comment tag allows non-IE browsers to
+	     see the HTML whilst being compatible with serving as XML -->
+	<!--[if !IE]><!-->
+	<object width="{{ visual.content_object.poster.large.width }}" 
+	        height="{{ visual.content_object.poster.large.height }}" 
+	        type="video/quicktime" data="{{ visual.content_object.video.url }}">
+    <!--<![endif]-->
+    <param name="src" value="{{ visual.content_object.video.url }}" />
+	<param name="showlogo" value="false" />
+	<!-- fallback to Flash -->
+    <div id="video">
+        <img src="{{ visual.content_object.poster.large.url }}"
+             height="{{ visual.content_object.poster.large.height }}"
+             width="{{ visual.content_object.poster.large.width }}"
+             alt="{{ visual.content_object.poster.title }}"
+        / >
+    </div>
+	<script type="text/javascript">
+        var so = new SWFObject('/media/swf/player.swf','player','{{ visual.content_object.poster.large.width }}','{{ visual.content_object.poster.large.height }}','9','#ffffff');
+        so.addParam('allowfullscreen','true');
+        so.addParam('allowscriptaccess','always');
+        so.addParam('wmode','opaque');
+        so.addVariable('file','{{ visual.content_object.video.url }}');
+        so.addVariable('controlbar','over');
+        so.addVariable('skin', '/media/swf/bekle.swf');
+        so.addVariable('image','{{ visual.content_object.poster.large.url }}');
+        so.write('video');
+    </script>
+	</object>
+	<!--<![endif]-->
+</video>
+<!-- you *must* offer a download link as they may be able to play the file locally -->
+<p>Download Video: <a href="{{ visual.content_object.video.url }}">High Quality MP4</a></p>
+{% endspaceless %}

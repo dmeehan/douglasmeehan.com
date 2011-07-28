@@ -1,0 +1,20 @@
+{% spaceless %}
+	 <div id="video">
+        <img src="{{ visual.content_object.poster.large.url }}"
+             height="{{ visual.content_object.poster.large.height }}"
+             width="{{ visual.content_object.poster.large.width }}"
+             alt="{{ visual.content_object.poster.title }}"
+        / >
+    </div>
+	<script type="text/javascript">
+        var so = new SWFObject('/media/swf/player.swf','player','{{ visual.content_object.poster.large.width }}','{{ visual.content_object.poster.large.height }}','9','#ffffff');
+        so.addParam('allowfullscreen','true');
+        so.addParam('allowscriptaccess','always');
+        so.addParam('wmode','opaque');
+        so.addVariable('file','{{ visual.content_object.video.url }}');
+        so.addVariable('controlbar','over');
+        so.addVariable('skin', '/media/swf/bekle.swf');
+        so.addVariable('image','{{ visual.content_object.poster.large.url }}');
+        so.write('video');
+    </script>
+{% endspaceless %}

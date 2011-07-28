@@ -1,0 +1,34 @@
+{% extends "portfolio/portfolio.html" %}
+{% block title %}{{ block.super }} | {{ context|capfirst }}{% endblock %}
+{% block js %}
+{{ block.super }}
+{% endblock js %}
+{% block content %}
+{% block main %}
+<div id="main">
+    <h2>{{ context|capfirst }}</h2>
+    {% for project in project_list %}
+    <div class="project">          
+        {% for obj in project.projectvisual_set.all %}
+            {% if obj.lead %}
+            <a href=""
+               title="{{ project.title }}">
+               {% if obj.content_object.tile %}
+               <img src="{{ obj.content_object.large.url }}"
+                    width="{{ obj.content_object.large.width }}"
+                    height="{{ obj.content_object.large.height }}"
+                    alt="{{ project.title }}" />
+               {% endif %}
+            </a>
+            {% endif %}
+        {% endfor %}
+        <h3>{{ project.title }}</h3>
+        <div id="featured-details">
+            <p>{{ project.date|date:"F Y" }}</p>
+            {{ project.description_html|safe|truncatewords_html:50 }}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+{% endblock %}

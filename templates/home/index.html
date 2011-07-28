@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block js %}
+{{ block.super }}
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<script type="text/javascript" src="/media/js/jquery/jcarousel-lite/jcarousellite_1.0.1.pack.js"></script>
+<script type="text/javascript" src="/media/js/jquery/mousewheel/jquery.mousewheel.min.js"></script>
+<script type="text/javascript" src="/media/js/jquery/easing/jquery.easing.1.3.js"></script>
+<script type="text/javascript">
+$(function() {
+    $(".display").jCarouselLite({
+        btnNext: ".next",
+        btnPrev: ".prev",
+        mouseWheel: true,
+        speed: 800,
+        easing: "easeInOutSine"
+    });
+});
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+	   $(".zoom").colorbox();
+    });
+</script>
+{% endblock js %}
+{% block bodyid %}id="home"{% endblock bodyid %}
+{% block content %}
+<div id="project">
+   <a href="#" class="control prev">Previous</a>
+   <div id="images">
+       <div class="display">
+           <ul>
+               {% for project in object_list %}
+               <li>
+                   {% for visual in project.projectvisual_set.all %}
+                       {% if visual.lead %}
+                            {% if visual.content_object.original %}
+                            <a href="{% url level0.portfolio.views.project_detail project.slug %}" title="{{ visual.content_object.caption }}">
+                            <img src="{{ visual.content_object.large.url }}" 
+                                 width="{{ visual.content_object.large.width }}"
+                                 height="{{ visual.content_object.large.height }}"
+                                 alt="{{ visual.content_object.title }}" />
+                            </a>
+                            {% endif %}
+                            {% if visual.content_object.video %}
+                                {% include "widgets/video.html" %}
+                            {% endif %}
+                            {% if visual.content_object.audio %}
+                                {% include "widgets/audio.html" %}
+                            {% endif %}
+                       {% endif %}
+                    {% endfor %}
+                    <p>{{ project.title }}</p>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <a href="#" class="control next">Next</a>
+<div>
+<div id="welcome">
+<h2>Welcome</h2>
+<p>Douglas Meehan is a landscape and urban designer  with a focus on 
+sustainable urban design: particularly through the retrofitting of 
+existing urban centers with productive public space, public transport, 
+and green infrastructure.  With a background in digital media design, he 
+has introduced new methods of multimedia representation to his project 
+work - including internet and time-based media - to better conceptualize 
+and visualize the complex relationships within urban and ecological 
+systems.  At WRT, Douglas has worked on a range of international 
+projects at various scales, from conceptual design to construction 
+documents.</p>
+</div>
+{% endblock content %}

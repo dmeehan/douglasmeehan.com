@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}{{ block.super }} | Work | Disciplines{% endblock %}
+{% block pageid %}work{% endblock %}
+{% block bodyid %}id="work"{% endblock %}
+{% block content %}
+{% block main %}
+<div id="main">
+    <h2>Disciplines</h2>
+    {% for discipline in discipline_list %}
+    <h3><a href="{% url level0.portfolio.views.discipline_detail discipline.slug %}">{{ discipline.name }}</a></h3>
+    {{ discipline.description }}
+    {% endfor %}
+</div>
+{% endblock %}
+{% block aside %}
+<div id="aside">
+</div>
+{% endblock %}
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "blog_links.html" %}
+{% block title %}{{ block.super }} | Links{% endblock %}
+{% block content %}
+<h2>Links</h2>
+<ul>
+{% for link in latest %}
+	<li><a href="{{ link.get_absolute_url }}">{{ link.title }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}
+
+{% block description %}
+<p>This is a list of the latest {{ latest.count }} link{{ latest.count|pluralize:",s" }} published on my blog.</p>
+{% endblock %}

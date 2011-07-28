@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Images{% endblock %}
+{% block content %}
+<h2>Portoflio</h2>
+<ul class="projects-list">
+ {% for image in object_list %}
+   <li class="project">
+    <h3 class="name">{{ image.title }}</h3>
+      <img src="{{ image.url }}" 
+      	width="{{ image.width }}"
+      	height="{{ image.height }}"
+      	alt="{{ image.name }}" 
+      	title="{{ image.description }}" />
+      
+     <img src="{{ image.thumbnail.url }}" 
+      	width="{{ image.thumbnail.width }}"
+      	height="{{ image.thumbnail.height }}"
+      	alt="{{ image.name }}" 
+      	title="{{ image.description }}" />
+      
+     <img src="{{ image.portfoliolead.url }}" 
+      	width="{{ image.portfoliolead.width }}"
+      	height="{{ image.portfoliolead.height }}"
+      	alt="{{ image.name }}" 
+      	title="{{ image.description }}" />
+      		
+     <div class="description">
+     {{ object.description }}
+     </div>
+     <dl class="meta">
+      <dt>Client</dt>
+      <dd></dd>
+      <dt>Disciplines</dt>
+      <dd></dd>
+     </dl>
+   </li>
+ {% endfor %}
+</ul>
+{% endblock %}

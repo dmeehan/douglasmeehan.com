@@ -1,0 +1,11 @@
+{% spaceless %}
+<video class="sublime"
+       width="{{ visual.content_object.poster.large.width }}" 
+       height="{{ visual.content_object.poster.large.height }}" 
+       poster="{{ visual.content_object.poster.large.url }}" 
+       preload="none">
+	
+    <source src="{{ visual.content_object.video.url}}" />
+</video>
+{% endspaceless %}
+

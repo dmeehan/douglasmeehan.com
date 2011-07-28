@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+{% block title %}{{ block.super }} | About{% endblock title %}
+{% block bodyid %}id="about"{% endblock %}
+{% block content %}
+{% block main %}
+<ul id="accordion">
+    {% for project in project_list %}
+    <li id="project{{ forloop.counter }}" class="stack">     
+        {% for visual in project.projectvisual_set.all %}
+            {% if visual.lead %}
+            <a href="{% url level0.portfolio.views.project_detail project.slug %}"
+               title="{{ project.title }}">
+               {% if visual.content_object.original %}
+               <img src="{{ visual.content_object.large.url }}"
+                    width="{{ visual.content_object.large.width }}"
+                    height="{{ visual.content_object.large.height }}"
+                    alt="{{ project.title }}" />
+               {% endif %}
+            </a>
+            {% endif %}
+        {% endfor %}
+    </li>
+{% endfor %}
+</ul>
+<h1 class="section">About Me</h1>
+<div id="resume">
+<section id="welcome">
+<p>I am a designer living in the heart of Philadelphia, PA. My work focuses on urban design through the medium of landscape architecture: 
+particularly the retrofitting of underutilized urban centers with productive public space, public transport, 
+and green infrastructure.  
+</p><p>With a background in digital media design, I
+have introduced new methods of multimedia representation to my project 
+work - including internet and time-based media - both to better visualize the complex relationships within urban and ecological 
+systems and to better conceptualize design ideas for clients and stakeholders.</p>
+<p>I am currently a landscape designer at Wallace Roberts & Todd where I have worked on a range of 
+international 
+projects at various scales, from competitions to construction 
+documentation.</p>
+</section>
+<section>
+<h3>Work Experience</h3>
+<h4><span class="company">Wallace Roberts & Todd</span> 
+    <span class="title">Landscape Designer</span> 
+    <span class="city">Philadelphia, PA.</span> 
+    <span class="date">Sept. 2008-Present</span></h4>
+<ul>
+   <li>Created conceptual design master plan and design manual for Red Mountain Park, a new 1,200 acre
+public park on a former iron ore mining mountain in Birmingham, Alabama.</li>
+   <li>Designed custom paving pattern and developed construction documentation for an amphitheater and
+series of plazas on the site of the Bethlehem, PA Steel Stacks</li>
+   <li>Collaborated with Takenaka Architects in Tokyo, Japan on the landscape design of a new office building
+outside of Tokyo. Helped develop the overall landscape design concept and designed a series of three
+interior courtyards for the building.</li> 
+   <li>Worked with a team to create a design concept and plan for Gwanggyo 
+Lakeside Park, a new park anchored by former agricultural reservoirs in Gwanggyo, Korea.</li>    
+</ul>
+<div class="extra">
+<h4><span class="company">EDAW</span> Internship Program, Surfer's Paradise, Australia + Edinburgh, Scotland. Summer 2007</h4>
+<ul>
+    <li>One of 30 landscape architecture, architecture, planning, and environmental science students selected from around the world</li>
+    <li>Created a vision and masterplan for Surfer's Paradise in 2050 entitiled 
+        "Intertidal Urbanity" focused on adapting to climate change and positioning Surfer's as a world-class radically sustainable city</li>
+    <li>Worked as a Design Intern in EDAW's Edinburgh office. Designed landscape and streetscape plan for a brownfield/adaptive-reuse infill development in downtown Glasgow</li>
+</ul>
+<h4><span class="company">Wallace Roberts & Todd</span> Design Intern, Philadelphia, PA. Summer 2007</h4>
+<ul>
+    <li>Worked with a design team headed by Margie Ruddick on a competition entry for a new park on Governor's Island</li>
+    <li>Helped design and digitally model the topography and integrated green building roofs</li>
+    <li>Created several perspective drawings and plan renderings of the various experiences within the park</li>
+</ul>
+<h4><span class="company">Hargreaves Associates</span> Design Intern, San Francisco, CA. Summer 2006</h4>
+<ul>
+    <li>Built topographic study models, and drew planting and grading plans for a park project in Texas</li>
+    <li>Created design development diagrams, drawings and renderings for a pool deck and entryway project at
+a Las Vegas hotel</li>
+    <li>Created perspective drawings and plan renderings for a variety of other projects at various scales</li>
+</ul>
+<h4><span class="company">City Parks Association</span> Intern, Philadelphia, PA. Summer 2005</h4>
+<ul>
+    <li>Facilitated large community forums focused on innovative ways of utilizing vacant land in Philadelphia</li>
+    <li>Synthesized community input, along with research and case studies, into a brief for the Urban Voids:
+Grounds for Change International Design Competiton</li>
+</ul>
+<h4><span class="company">Site59.com/Travelocity.com</span> Director of Interface Development / Senior Web Designer, New York, NY. Mar. 2001-Jun. 2004</h4>
+<h4><span class="company">Iron Street Labs</span> Web Designer, New York, NY. Sept. 1999-Mar. 2001</h4>
+</div>
+</section>
+<section>
+<h3>Teaching Experience</h3>
+<h4><span class="company">University of Pennsylvania School of Design</span> Guest Critic, Philadelphia, PA. 
+Spring 
+2010</h4>
+   <ul>
+       <li>Participated in the jury for Marion Weiss & Michael Manfredi's architecture studio focused on 
+designing a botanical garden on sites in Queens, NY and Tanzania, Africa.</li>
+</ul>
+<h4><span class="company">Temple University</span> Guest Lecturer, Philadelphia, PA. Fall 2009</h4>
+  <ul>
+     <li>Invited to give a lecture on the topic of landscape urbanism to students in the architecture 
+department</li>
+</ul>
+<h4><span class="company">University of Pennsylvania School of Design</span> Teaching Assistant, Philadelphia, 
+PA. 
+Spring 
+2005, Fall 
+2007</h4>
+<ul>
+   <li>Teaching Assistant for CPLN 655: Transportation & Land Use with Professor Rachel Weinberger</li>
+   <li>Teaching Assistant for LARP 542: Digital Visualization with Sarah Widener Astheimer</li>
+</ul>
+</section>
+<section>
+<h3>Skills & Software</h3>
+
+<ul>
+    <li><strong>2D Design:</strong> AutoCAD, Illustrator, Photoshop, InDesign</li>
+    <li><strong>3D Design:</strong> Rhinoceros + RhinoScript, 3D Studio Max, SketchUp
+    <li><strong>Motion Design:</strong> AfterEffects, Flash</li>
+    <li><strong>Analysis:</strong> ArcGIS,  AutoCAD Civil 3D</li>
+    <li><strong>Web:</strong> Hand-coded HTML & CSS,  Django, JQuery, Textpattern</li>
+    <li><strong>Operating Systems:</strong> Mac OS X, Windows, Linux 
+    <li><strong>Programming languages:</strong> HTML, CSS, Python, PHP, Javascript, Actionscript</li>
+</ul>
+</section>
+<section>
+<h3>Education</h3>
+<h4><span class="company">University of Pennsylvania School of Design</span>, <span>Philadelphia, PA.</span> <span>2008</span></h4>
+<ul>
+    <li>Master of Landscape Architecture (MLA)</li>
+    <li>Master of City & Regional Planning (MCP), Concentration in Urban Design</li>
+</ul>
+<h4><span class="company">Georgetown University</span>, <span>Washington, D.C.</span> <span>1997</span></h4>
+<ul>
+    <li>Bachelor of Arts; Major in Psychology, Minor in Theology. Varsity Lacrosse Captain, WGTB Student Radio, Georgetown Gonzo Magazine</li>
+</ul>
+</section>
+<section>
+<h3>Awards</h3>
+<ul>
+    <li>Fargo Urban Infill International Design Competition First Prize 2010</li>
+    <li>Urban Land Institute Gerald Hines Urban Design Competiton Finalist 2008</li>
+    <li>PennDesign Landscape Architecture Fellowship 2008</li>
+    <li>PennDesign Outstanding Achivement in Landscape Architecture Award 2007</li>
+    <li>Pennsylvania Planning Association Student Project Certificate of Merit 2005</li>
+</ul>
+</section>
+</div>
+<aside>
+<h2>Contact Info</h2>
+<h3>Email</h3>
+<p><a href="mailto:dmeehan@gmail.com">dmeehan@gmail.com</a></p>
+<h2>Documents</h2>
+<h3>Print Resume</h3>
+<p><a href="/media/docs/douglas_meehan_resume.pdf">Download Resume</a> (PDF: 193kB)</p>
+<h3>Print Portfolio</h3>
+<p><a href="/media/docs/douglas_meehan_portfolio.pdf">Download Portfolio</a> (PDF: 24.3MB)</p>
+<h2>About This Site</h2>
+<p>This site is a custom web application built with HTML5, CSS3, and JQuery on top of the Python web framework, 
+<a href="http://www.djangoproject.com">Django</a>.</p>
+<p>It is built with flexibility and growth in mind, so please come back again for 
+new updates and features.</p>
+<p>All of the images and text were created by Douglas Meehan, unless otherwise noted.</p>
+</aside>
+{% endblock main %}
+{% endblock content %}

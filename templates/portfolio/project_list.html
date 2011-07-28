@@ -1,0 +1,66 @@
+{% extends "portfolio/portfolio.html" %}
+{% block title %}{{ block.super }}{% endblock %}
+{% block js %}
+{{ block.super }}
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+{% endblock js %}
+{% block content %}
+{% block main %}
+<div id="main">
+    {% block projects %}
+    {% for project in project_list %}
+    {% if project.featured_work %}
+    <div class="project featured">          
+        {% for visual in project.projectvisual_set.all %}
+            {% if visual.lead %}
+            <a href="{% url level0.portfolio.views.project_detail project.slug %}"
+               title="{{ project.title }}">
+               {% if visual.content_object.original %}
+               <img src="{{ visual.content_object.large.url }}"
+                    width="{{ visual.content_object.large.width }}"
+                    height="{{ visual.content_object.large.height }}"
+                    alt="{{ project.title }}" />
+               {% endif %}
+            </a>
+            {% endif %}
+        {% endfor %}
+        <h3>{{ project.title }}</h3>
+        <div id="details">
+            <p>{{ project.genre }}</p>
+            {{ project.description_html|safe|truncatewords_html:75 }}
+            <p id="date">{{ project.date|date:"F Y" }}</p>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% for project in project_list %}
+    {% if not project.featured_work %}
+    <div class="project listing">
+        <a href="{% url level0.portfolio.views.project_detail project.slug %}"
+                   title="{{ project.title }}">
+        <div class="title">
+    	{% for visual in project.projectvisual_set.all %}
+            {% if visual.lead %}
+                {% if visual.content_object.original %}
+                <img src="{{ visual.content_object.tile.url }}"
+                     width="{{ visual.content_object.tile.width }}"
+                     height="{{ visual.content_object.tile.height }}"
+                     alt="{{ visual.content_object.title }}" />
+                {% endif %}
+            {% endif %}
+       {% endfor %}
+       <h3>{{ project.title }}</h3>
+       </div>
+        <div class="description">
+            <h3>{{ project.title }}</h3>
+            {{ project.description_html|safe|truncatewords_html:60}}
+            <p class="date">//{{ project.date|date:"FY" }}</p>
+            <p>{{ project.genre }}</p>
+        </div>
+        </a>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endblock %}</div>
+{% endblock %}
+{% endblock %}

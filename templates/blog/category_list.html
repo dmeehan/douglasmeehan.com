@@ -1,0 +1,14 @@
+{% extends "blog_categories.html" %}
+{% block title %}{{ block.super }} | Categories{% endblock %}
+{% block content %}
+<h2>Categories</h2>
+<ul>
+{% for category in object_list %}
+	<li><a href="{{ category.get_absolute_url }}">{{ category.title }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}
+
+{% block description %}
+<p>This is a list of categories on my blog.</p>
+{% endblock %}
