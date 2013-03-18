@@ -10,8 +10,8 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASE_ENGINE = 'postgresql_psycopg2'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-DATABASE_NAME = 'dmeehan'             # Or path to database file if using sqlite3.
-DATABASE_USER = 'dmeehan'             # Not used with sqlite3.
+DATABASE_NAME = 'possiblecity'             # Or path to database file if using sqlite3.
+DATABASE_USER = 'possiblecity'             # Not used with sqlite3.
 DATABASE_PASSWORD = 'bblmag2e'         # Not used with sqlite3.
 DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
 DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
@@ -93,7 +93,7 @@ INSTALLED_APPS = (
     'django.contrib.markup',
       
     #admin
-    'grappelli',
+    #'grappelli',
     'django.contrib.admin',
     'django.contrib.admindocs',
     
@@ -101,14 +101,14 @@ INSTALLED_APPS = (
     'debug_toolbar',
     'tagging',
     'imagekit',
-    'basic.inlines',
-    'basic.blog',    
+    #'basic.inlines',
+    #'basic.blog',    
     
     # local
     'level0.contacts',
     'level0.media',
     'level0.portfolio',
-    'level0.posts',
+    #'level0.posts',
 )
 
 INTERNAL_IPS = ('67.18.189.122', '127.0.0.1',)
