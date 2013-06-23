@@ -1,4 +1,5 @@
 <!doctype html>
+{% load static %}
 <html lang="en" class="no-js">
 <head>
     <meta charset="utf-8">
@@ -17,13 +18,13 @@
     <meta name="copyright" content="&copy; {% now "Y" %} Douglas Meehan" />
     {% block css %}
     <!-- CSS : implied media="all" -->
-    <link rel="stylesheet" href="/media/css/base.css" />
+    <link rel="stylesheet" href="{% static "css/base.css" %}" />
     <!-- For the less-enabled mobile browsers like Opera Mini -->
-    <link rel="stylesheet" media="handheld" href="/media/css/handheld.css?v=1">
+    <link rel="stylesheet" media="handheld" href="{% static "css/handheld.css?v=1" %}">
     {% endblock css %}
     {% block js_head %}
     <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
-    <script src="/media/js/modernizr-1.5.min.js"></script>
+    <script src="{% static "js/modernizr-1.5.min.js" %}"></script>
     {% endblock js_head %}
 </head>
 <body {% block bodyid %}{% endblock bodyid %}>
@@ -59,7 +60,7 @@
     
       <!-- Grab Google CDN's jQuery. fall back to local if necessary -->
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-      <script>!window.jQuery && document.write('<script src="/media/js/jquery/jquery-1.4.2.min.js"><\/script>')</script>
+      <script>!window.jQuery && document.write('<script src="{{ STATIC_URL }}js/jquery/jquery-1.4.2.min.js"><\/script>')</script>
 
       <!-- asynchronous google analytics: mathiasbynens.be/notes/async-analytics-snippet 
            change the UA-XXXXX-X to be your site's ID -->

@@ -1,9 +1,9 @@
-
 {% extends "portfolio/portfolio.html" %}
+{% load static %}
 {% block title %}{{ block.super }} | {{ project.title }}{% endblock %}
 {% block css %}
     {{ block.super }}
-    <link rel="stylesheet" href="/media/css/colorbox.css" type="text/css" media="screen" title="Colorbox">
+    <link rel="stylesheet" href="{% static "css/colorbox.css" %}" type="text/css" media="screen" title="Colorbox">
 {% endblock %}
 {% block content %}
 <div id="project">
@@ -162,11 +162,11 @@
 </div>
 {% endblock %}
 {% block js_local %}
-<script type="text/javascript" src="/media/js/jquery/jcarousel-lite/jcarousellite_1.0.1.pack.js"></script>
-<script type="text/javascript" src="/media/js/jquery/easing/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="{% static "js/jquery/jcarousel-lite/jcarousellite_1.0.1.pack.js" %}"></script>
+<script type="text/javascript" src="{% static "js/jquery/easing/jquery.easing.1.3.js" %}"></script>
 <script src="http://html5media.googlecode.com/svn/trunk/src/html5media.min.js"></script>
 <!--<script type="text/javascript" src="http://cdn.sublimevideo.net/js/ogxmnqcc.js"></script>-->
-<script type="text/javascript" src="/media/js/jquery/jquery.colorbox-min.js"></script>
+<script type="text/javascript" src="{% static "js/jquery/jquery.colorbox-min.js" %}"></script>
 <script type="text/javascript">
 $(function() {
     $(".display").jCarouselLite({
