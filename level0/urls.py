@@ -17,10 +17,10 @@ urlpatterns = patterns('',
     (r'^pdf/douglas_meehan_portfolio.pdf', 'django.views.generic.simple.redirect_to', {'url': '/media/docs/douglas_meehan_portfolio.pdf'}),
 
     # django-filebrower admin extension:
-    (r'^admin/filebrowser/', include('filebrowser.urls')),
+    #(r'^admin/filebrowser/', include('filebrowser.urls')),
     
     # django-grappelli admin extension:
-    (r'^grappelli/', include('grappelli.urls')),
+    #(r'^grappelli/', include('grappelli.urls')),
 
     # Administration interface:
     (r'^admin/', include(admin.site.urls)),
@@ -32,22 +32,22 @@ urlpatterns = patterns('',
     #(r'^$', include('level.portfolio.urls')),
     
     # Homepage:
-    (r'^$', 'django.views.generic.simple.redirect_to', {'url': '/work/', 'permanent': False}),
+    (r'^$', 'django.views.generic.simple.redirect_to', {'url': '/about/', 'permanent': False}),
     
     # Portfolio:
-    (r'^work/', include('level0.portfolio.urls')),
+    #(r'^work/', include('level0.portfolio.urls')),
     
     # About:
     (r'^about/', 'level0.about.views.about_index'),
 
     # Blog
-    (r'^words/', include('basic.blog.urls')),
+    #(r'^words/', include('basic.blog.urls')),
     
     # Sections:
     #(r'^(?P<section>\w+)/$', 'level0.organize.views.section_index'),
     
     # Comments:
-    (r'^comments/', include('django.contrib.comments.urls')),
+    #(r'^comments/', include('django.contrib.comments.urls')),
 
     # Flatpages. This should always go last as a catch-all:
     #(r'', include('django.contrib.flatpages.urls')),
