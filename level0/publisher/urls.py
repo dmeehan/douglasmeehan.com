@@ -1,2 +1,0 @@
-# cms/urls.py
-
