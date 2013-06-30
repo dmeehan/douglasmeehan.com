@@ -14,17 +14,6 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "douglasmeehan",
-        "USER": "douglasmeehan",
-        "PASSWORD": "bblmag2e",
-        "HOST": "",
-        "PORT": ""                      
-    }
-}
-
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -104,14 +93,11 @@ INSTALLED_APPS = (
     'debug_toolbar',
     'tagging',
     'imagekit',
-    #'basic.inlines',
-    #'basic.blog',    
     
     # local
     'level0.contacts',
     'level0.media',
     'level0.portfolio',
-    #'level0.posts',
 )
 
 INTERNAL_IPS = ('67.18.189.122', '127.0.0.1',)

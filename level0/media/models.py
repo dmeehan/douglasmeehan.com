@@ -18,7 +18,6 @@ from django.contrib.contenttypes import generic
 
 
 from tagging.fields import TagField
-from imagekit.models import ImageModel
     
 class File(models.Model):
     """
@@ -50,7 +49,7 @@ class File(models.Model):
         return '%s' % self.title
  
 
-class Image(ImageModel,File):
+class Image(File):
     """
     
         An image file, such as a photograph or other rasterized image.
@@ -104,12 +103,6 @@ class Image(ImageModel,File):
 
     image_type = models.PositiveSmallIntegerField(verbose_name="type", choices=IMAGE_CHOICES, default=DRAWING)
 
-    class IKOptions:
-        spec_module = 'level0.media.specs'
-        cache_dir = 'cache'
-        image_field = 'original'
-
-    
 
 class Video(File):
     """
