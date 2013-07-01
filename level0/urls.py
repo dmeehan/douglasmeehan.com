@@ -11,10 +11,10 @@ urlpatterns = patterns('',
     #(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     
     # redirects
-    (r'^portfolio/', 'django.views.generic.simple.redirect_to', {'url': '/work/'}),
-    (r'^portfolio/slideshow.php', 'django.views.generic.simple.redirect_to', {'url': '/work/'}),
-    (r'^pdf/douglas_meehan.pdf', 'django.views.generic.simple.redirect_to', {'url': '/media/docs/douglas_meehan_resume.pdf'}),
-    (r'^pdf/douglas_meehan_portfolio.pdf', 'django.views.generic.simple.redirect_to', {'url': '/media/docs/douglas_meehan_portfolio.pdf'}),
+    #(r'^portfolio/', 'django.views.generic.simple.redirect_to', {'url': '/work/'}),
+    #(r'^portfolio/slideshow.php', 'django.views.generic.simple.redirect_to', {'url': '/work/'}),
+    #(r'^pdf/douglas_meehan.pdf', 'django.views.generic.simple.redirect_to', {'url': '/media/docs/douglas_meehan_resume.pdf'}),
+    #(r'^pdf/douglas_meehan_portfolio.pdf', 'django.views.generic.simple.redirect_to', {'url': '/media/docs/douglas_meehan_portfolio.pdf'}),
 
     # django-filebrower admin extension:
     #(r'^admin/filebrowser/', include('filebrowser.urls')),
@@ -23,7 +23,7 @@ urlpatterns = patterns('',
     #(r'^grappelli/', include('grappelli.urls')),
 
     # Administration interface:
-    (r'^admin/', include(admin.site.urls)),
+    #(r'^admin/', include(admin.site.urls)),
     
     
     # django-tinymce admin extension
@@ -32,13 +32,15 @@ urlpatterns = patterns('',
     #(r'^$', include('level.portfolio.urls')),
     
     # Homepage:
-    (r'^$', 'django.views.generic.simple.redirect_to', {'url': '/about/', 'permanent': False}),
+    (r'^work/$', 'django.views.generic.simple.redirect_to', {'url': 'http://www.linkedin.com/in/douglasmeehan', 'permanent': False}),
+    (r'^about/$', 'django.views.generic.simple.redirect_to', {'url': 'http://www.linkedin.com/in/douglasmeehan', 'permanent': False}),
+    (r'^$', 'django.views.generic.simple.redirect_to', {'url': 'http://www.linkedin.com/in/douglasmeehan', 'permanent': False}),
     
     # Portfolio:
     #(r'^work/', include('level0.portfolio.urls')),
     
     # About:
-    (r'^about/', 'level0.about.views.about_index'),
+    #(r'^about/', 'level0.about.views.about_index'),
 
     # Blog
     #(r'^words/', include('basic.blog.urls')),
